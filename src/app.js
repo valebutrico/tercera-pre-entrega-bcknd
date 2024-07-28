@@ -81,57 +81,29 @@ app.use((req, res, next) => {
 });
 
 // Rutas de autenticación
+app.use("/", authRoutes);
 app.use("/api/auth", authRoutes);
 
 // Rutas protegidas
 app.use("/api/products", AuthMiddleware.current, productRoutes); 
 app.use("/api/carts", AuthMiddleware.current, cartRoutes); 
-app.use("/api/users", userRoutes);
-app.use("/api/tickets", ticketRoutes);
-app.use("/", AuthMiddleware.current, viewRoutes); 
+app.use("/api/users", AuthMiddleware.current, userRoutes);
+app.use("/api/tickets", AuthMiddleware.current, ticketRoutes);
+app.use("/", viewRoutes); 
 
-// Ruta de login para manejar la autenticación y redirección
-app.post("/login", async (req, res) => {
-  try {
-    const response = await fetch("http://localhost:8080/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(req.body),
-    });
-    const data = await response.json();
-    if (data.token) {
-      res.redirect(`/api/products?token=${data.token}`);
-    } else {
-      res.status(401).json({ message: "Authentication failed" });
-    }
-  } catch (error) {
-    res.status(500).json({ message: "Error processing login", error });
-  }
+app.get("/products", AuthMiddleware.current, (req, res) => {
+  res.json(req.user);
 });
 
-// Ruta para manejar el acceso a la vista de productos
 app.get("/", (req, res) => {
-  if (!req.query.token) {
+  if (!req.isAuthenticated()) {
     return res.redirect("/login");
   }
-  res.redirect(`/api/products?token=${req.query.token}`);
+  res.redirect("/api/products");
 });
-
-
-// app.get("/products", AuthMiddleware.current, (req, res) => {
-//   res.json(req.user);
-// });
-
-// app.get("/", AuthMiddleware.current, (req, res) => {
-//   if (!req.isAuthenticated()) {
-//     return res.redirect("/login");
-//   }
-//   res.redirect("/api/products");
-// });
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 export default app;
+
