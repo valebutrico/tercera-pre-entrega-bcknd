@@ -3,7 +3,7 @@ import User from '../models/User.js';
 
 class AuthMiddleware {
   static async current(req, res, next) {
-    const token = req.headers.authorization?.split(' ')[1];
+    const token = req.cookies.token;
 
     if (!token) {
       return res.redirect('/login');

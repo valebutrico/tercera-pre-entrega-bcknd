@@ -8,7 +8,11 @@ class ProductController {
   async getProducts(req, res) {
     try {
       const products = await this.productRepository.getAll();
-      res.json(products);
+      res.render('products', {
+        productos: products,
+        username: `${req.user.first_name} ${req.user.last_name}`,
+        role: req.user.role,
+      });
     } catch (error) {
       res.status(500).json({ message: "Error getting products" });
     }

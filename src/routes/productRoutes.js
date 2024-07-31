@@ -6,14 +6,11 @@ import roleMiddleware from "../middleware/roleMiddleware.js";
 const router = Router();
 const productController = new ProductController();
 
-router.get("/", AuthMiddleware.current, async (req, res) => {
-  try {
-    const productController = new ProductController();
-    await productController.getProducts(req, res);
-  } catch (error) {
-    res.status(500).json({ message: "Error getting products" });
-  }
-});
+router.get(
+  "/", 
+  AuthMiddleware.current, 
+  productController.getProducts.bind(productController)
+);
 
 router.post(
   "/",

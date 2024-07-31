@@ -12,12 +12,15 @@ passport.use(
       try {
         const user = await User.findOne({ email });
         if (!user) {
+          console.log("Incorrect email.");
           return done(null, false, { message: "Incorrect email." });
         }
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
+          console.log("Incorrect password.");
           return done(null, false, { message: "Incorrect password." });
         }
+        console.log("Authentication successful.");
         return done(null, user);
       } catch (err) {
         return done(err);

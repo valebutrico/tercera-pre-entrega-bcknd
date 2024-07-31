@@ -17,7 +17,6 @@ import MongoStore from "connect-mongo";
 import "./config/passportConfig.js";
 import authRoutes from "./routes/authRoutes.js";
 import AuthMiddleware from "./middleware/authMiddleware.js";
-import ProductController from "./controllers/productController.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -68,7 +67,7 @@ app.use(flash());
 app.use((req, res, next) => {
   if (req.isAuthenticated()) {
     res.locals.user = req.user;
-    res.locals.username = req.user.username || req.user.email.split("@")[0];
+    res.locals.username = `${req.user.first_name} ${req.user.last_name}`;
     res.locals.role = req.user.role;
   } else {
     res.locals.user = null;
