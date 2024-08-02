@@ -1,6 +1,7 @@
 import ProductRepository from "../repositories/productRepository.js";
 
 class ProductController {
+  
   constructor() {
     this.productRepository = new ProductRepository();
   }

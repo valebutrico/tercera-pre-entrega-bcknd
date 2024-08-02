@@ -2,6 +2,7 @@ import Product from "../models/Product.js";
 import Cart from "../models/Cart.js";
 
 class ViewController {
+  
   static async renderProductsPage(req, res) {
     try {
       const { limit = 10, page = 1, sort, query } = req.query;

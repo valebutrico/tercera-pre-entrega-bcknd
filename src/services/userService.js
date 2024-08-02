@@ -1,6 +1,7 @@
 import DaoFactory from "../dao/factoryDao.js";
 
 class UserService {
+
   constructor() {
     this.userDao = DaoFactory.getDAO("user");
   }
@@ -11,7 +12,7 @@ class UserService {
 
   async getUserById(id) {
     return await this.userDao.getById(id);
-  }
+  }  
 
   async createUser(userData) {
     return await this.userDao.create(userData);

@@ -1,4 +1,5 @@
 class InterfaceDAO {
+  
   async getAll() {
     throw new Error("Method not implemented");
   }

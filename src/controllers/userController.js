@@ -4,6 +4,7 @@ import UserCurrentDTO from "../dto/UserCurrentDto.js";
 const userService = new UserService();
 
 class UserController {
+  
   static async getAllUsers(req, res) {
     const users = await userService.getAllUsers();
     res.json(users);

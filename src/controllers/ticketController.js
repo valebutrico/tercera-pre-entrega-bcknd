@@ -3,14 +3,6 @@ import TicketService from "../services/ticketService.js";
 const ticketService = new TicketService();
 
 class TicketController {
-  static async createTicket(req, res) {
-    try {
-      const ticket = await ticketService.createTicket(req.body);
-      res.json(ticket);
-    } catch (error) {
-      res.status(500).json({ message: "Error creating ticket", error });
-    }
-  }
 
   static async getAllTickets(req, res) {
     try {
@@ -27,6 +19,15 @@ class TicketController {
       res.json(ticket);
     } catch (error) {
       res.status(500).json({ message: "Error getting ticket", error });
+    }
+  }
+
+  static async createTicket(req, res) {
+    try {
+      const ticket = await ticketService.createTicket(req.body);
+      res.json(ticket);
+    } catch (error) {
+      res.status(500).json({ message: "Error creating ticket", error });
     }
   }
 

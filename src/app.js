@@ -1,20 +1,20 @@
-import dotenv from "dotenv";
-import { fileURLToPath } from "url";
-import path from "path";
 import express from "express";
+import dotenv from "dotenv";
+import session from "express-session";
+import passport from "passport";
+import MongoStore from "connect-mongo";
+import cookieParser from "cookie-parser";
+import flash from "connect-flash";
+import path from "path";
+import { fileURLToPath } from "url";
 import { create } from "express-handlebars";
 import { connectDB } from "./config/config.js";
+import "./config/passportConfig.js";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
 import ticketRoutes from "./routes/ticketRoutes.js"
 import viewRoutes from "./routes/viewRoutes.js";
-import session from "express-session";
-import passport from "passport";
-import flash from "connect-flash";
-import cookieParser from "cookie-parser";
-import MongoStore from "connect-mongo";
-import "./config/passportConfig.js";
 import authRoutes from "./routes/authRoutes.js";
 import AuthMiddleware from "./middleware/authMiddleware.js";
 

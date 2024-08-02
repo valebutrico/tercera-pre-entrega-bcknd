@@ -1,6 +1,7 @@
 import InterfaceDAO from "./interfaceDao.js";
 
 class MongoDAO extends InterfaceDAO {
+  
   constructor(model) {
     super();
     this.model = model;

@@ -1,10 +1,11 @@
 import passport from "passport";
+import bcrypt from "bcrypt";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GitHubStrategy } from "passport-github2";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
-import bcrypt from "bcrypt";
 import User from "../models/User.js";
 
+// Local Strategy
 passport.use(
   new LocalStrategy(
     { usernameField: "email" },
@@ -29,6 +30,7 @@ passport.use(
   )
 );
 
+// Github Strategy
 passport.use(
   new GitHubStrategy(
     {
@@ -73,6 +75,7 @@ const opts = {
   secretOrKey: process.env.JWT_SECRET,
 };
 
+// Jwt Strategy
 passport.use(
   new JwtStrategy(opts, async (jwt_payload, done) => {
     try {
@@ -88,10 +91,10 @@ passport.use(
   })
 );
 
+// Serialize-Deserialize User
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
-
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);

@@ -1,6 +1,7 @@
 import Product from '../models/Product.js';
 
 class ProductDao {
+    
     static async findAll() {
         return await Product.find();
     }

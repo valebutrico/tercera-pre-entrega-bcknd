@@ -1,6 +1,7 @@
 import CartDao from '../dao/cartDao.js';
 
 class CartService {
+
     static async getAllCarts() {
         return await CartDao.findAll();
     }

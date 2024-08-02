@@ -1,6 +1,7 @@
 import User from '../models/User.js';
 
 class UserDao {
+    
     static async findAll() {
         return await User.find();
     }

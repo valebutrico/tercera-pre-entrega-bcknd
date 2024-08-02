@@ -1,8 +1,17 @@
 import DaoFactory from "../dao/factoryDao.js";
+
 class TicketService {
 
   constructor() {
     this.ticketDao = DaoFactory.getDAO("ticket");
+  }  
+
+  async getAllTickets() {
+    return await this.ticketDao.getAll();
+  }
+
+  async getTicketById(id) {
+    return await this.ticketDao.getById(id);
   }
 
   async createTicket(data) {
@@ -12,14 +21,6 @@ class TicketService {
       code: Math.random().toString(36).substring(2, 9), 
     };
     return await this.ticketDao.create(ticketData);
-  }
-
-  async getAllTickets() {
-    return await this.ticketDao.getAll();
-  }
-
-  async getTicketById(id) {
-    return await this.ticketDao.getById(id);
   }
 
   async updateTicket(id, data) {

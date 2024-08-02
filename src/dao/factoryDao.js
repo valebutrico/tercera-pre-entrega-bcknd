@@ -5,6 +5,7 @@ import Cart from "../models/Cart.js";
 import Ticket from "../models/Ticket.js";
 
 class DaoFactory {
+  
   static getDAO(type) {
     switch (type) {
       case "user":

@@ -1,6 +1,7 @@
 import Product from "../models/Product.js";
 
 class ProductRepository {
+  
   async getAll() {
     return Product.find();
   }
