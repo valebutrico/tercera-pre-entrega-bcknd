@@ -44,11 +44,11 @@ router.post('/logout', (req, res) => {
   });
 });
 
+// Github
 router.get(
   "/auth/github",
   passport.authenticate("github", { scope: ["user:email"] })
 );
-
 router.get(
   "/auth/github/callback",
   passport.authenticate("github", { failureRedirect: "/login" }),
@@ -57,6 +57,7 @@ router.get(
   }
 );
 
+// Current
 router.get("/current", AuthMiddleware.current, UserController.getCurrentUser);
 
 export default router;
